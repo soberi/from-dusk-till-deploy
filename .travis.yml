@@ -10,10 +10,14 @@ services:
 before_script: pip install docker-compose
 
 script:
-    - echo "Hello there"
+    - docker-compose run app sh -c "pytest test.py -p no:cacheprovider"
+
+after_success:
+    - coveralls
 
 deploy:
     provider: script
-    script: bash scripts/deploy.sh
+    skip-cleanup: true
+    script: bash ci/travis-deploy.sh
     on:
         branch: main

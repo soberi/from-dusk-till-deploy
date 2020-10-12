@@ -1,10 +1,20 @@
-from flask import Flask
+from flask import Flask, render_template, request
+from movie_rec_model import recommend_movies 
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['POST','GET'])
 
-def index():
-    return 'Hello world'
+def run_recommender():
+    
+    if request.method == 'POST':
+        query = request.form['query']
+        recommendation = recommend_movies(query, n=5)
+        
+        return render_template('index.html', output=recommendation)
+    
+    return render_template('index.html')
 
-app.run(host='0.0.0.0', port=8000)
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=port)
+#app.run(host='0.0.0.0', port=8000)

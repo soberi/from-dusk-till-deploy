@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+    <title>Movie recommender</title>
+</head>
+<body>
+   <h1>Welcome to the party, pal!</h1>
+   
+   <form actions="/" method="POST">
+       <h1>Name your movie</h1>
+       <div class="form-field">
+           <input class="user-query" type="text" name="query" placeholder="e.g. Shaun of the dead">
+           <button type="submit" href="/">A whole new world</button>
+       </div>
+   </form>
+   
+   <div class="output">
+       {% if output %}
+           <br>
+           <p>Our recommendation: {{ output }}</p>
+       {% endif %}
+   </div> 
+    
+</body>
+</html>
