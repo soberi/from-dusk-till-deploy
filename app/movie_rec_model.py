@@ -46,10 +46,10 @@ def get_movieid(query):
         year_pattern = r'(.*)\s\(\d{4}\)$'
         extr_title, = re.findall(year_pattern, title)
         
-        # get fuzz ration and remove CAsE-sEnsITiVity
+        # get fuzz ratio and remove CAsE-sEnsITiVity
         ratio = fuzz.ratio(extr_title.lower(), query)
         
-        # ration must be more than 60 in order to match
+        # ratio must be more than 60 in order to match
         if ratio > 60:
             matches.append((extr_title, movie_id, ratio))
     

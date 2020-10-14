@@ -9,9 +9,13 @@ def run_recommender():
     
     if request.method == 'POST':
         query = request.form['query']
-        recommendation = recommend_movies(query, n=5)
         
-        return render_template('index.html', output=recommendation)
+        if recommend_movies(query, n=5) is None:
+            return render_template('index.html')
+        else:
+            info, recommendation = recommend_movies(query, n=5)
+        
+        return render_template('index.html', output=recommendation, info=info)
     
     return render_template('index.html')
 
