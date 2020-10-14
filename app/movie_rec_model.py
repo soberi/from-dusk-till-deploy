@@ -3,36 +3,37 @@ import pickle
 import re
 from fuzzywuzzy import fuzz
 
-# Function to print output from movie list
 def print_recommendations(knn_output):
+    '''Function to print output from movie list'''    
     
     with open('movie_list.pkl', 'rb') as file:
         movie_list = pickle.load(file)
     
     distances, indices = knn_output
+    m_selection = []
     
     for i,res in enumerate(zip(distances.flatten(), indices.flatten())):
         distance, index = res
         name = movie_list.iloc[index]['title']
         if i == 0:
-            print(f'Users who liked {name} also like:')
-            print('----------------------------------------------\n')
+            or_movie = f'Users who liked {name} also like:'
         else:
-            print(f'{i}: {name}')
+            m_selection.append(name)
+    
+    return or_movie, m_selection
             
 
             
-# Creates vector array for the KNN model
 def movieid_vec(movie_id):
-    
+    '''Creates vector array for the KNN model'''  
     with open('movie_features.pkl', 'rb') as file:
         movie_features = pickle.load(file)
     
     return movie_features.loc[movie_id].values.reshape(1, -1)
 
 
-# Filters queries through movie titles
 def get_movieid(query):
+    '''Filters queries through movie titles'''    
     
     with open('movie_map.pkl', 'rb') as file:
         movie_map = pickle.load(file)
@@ -59,9 +60,8 @@ def get_movieid(query):
     # sorts the list of matches, with the highest ratio on top
     return sorted(matches, key=lambda x: x[2], reverse=True)[0][1]
 
-# Final function which uses actual KNN model on sparse matrix
 def recommend_movies(query, n=5):
-    
+    '''Final function which uses actual KNN model on sparse matrix'''    
     with open('model_knn.pkl', 'rb') as file:
         model_knn = pickle.load(file)
     
@@ -74,7 +74,7 @@ def recommend_movies(query, n=5):
     n_recs = n + 1
     recs = model_knn.kneighbors(movie_vec, n_neighbors=n_recs)
     
-    print_recommendations(recs)
+    return print_recommendations(recs)
     
 
 if __name__ == '__main__':
