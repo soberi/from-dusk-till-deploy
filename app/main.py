@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request
-from movie_rec_model import recommend_movies 
+from movie_rec_model import recommend_movies
+import os
 
 app = Flask(__name__)
+port = int(os.environ.get('PORT', 8000))
 
 @app.route('/', methods=['POST','GET'])
 
