@@ -13,7 +13,7 @@ def run_recommender():
         query = request.form['query']
         
         if recommend_movies(query, n=5) is None:
-            error = 'Oops, these are not the movies you\'re looking for.'
+            error = 'Oops, seems like we don\'t have that one, try another.'
             return render_template('index.html', error=error)
         else:
             # info = movie input by user, recommendation = list of 5 output

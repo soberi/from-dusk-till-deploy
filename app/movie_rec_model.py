@@ -17,7 +17,7 @@ def print_recommendations(knn_output):
         distance, index = res
         name = movie_list.iloc[index]['title']
         if i == 0:
-            or_movie = f'Users who liked {name} also like:'
+            or_movie = f'Peeps who liked {name} also like:'
         else:
             m_selection.append(name)
     

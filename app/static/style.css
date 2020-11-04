@@ -1,6 +1,22 @@
-h1 {
-    border: 2px #eee solid;
-    color: brown;
+:root {
+    --primary-col: #e6dcdc;
+}
+
+body {
+    text-align: center;
+    background: #19191d;
+}
+
+h1, h2 {
+    color: var(--primary-col);
     text-align: center;
     padding: 10px;
+}
+
+form {
+    display: inline-block;
+}
+
+p {
+    color: var(--primary-col) 
 }
