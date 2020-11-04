@@ -2,6 +2,7 @@
 import pickle
 import re
 from fuzzywuzzy import fuzz
+from sklearn.neighbors import NearestNeighbors
 
 def print_recommendations(knn_output):
     '''Function to print output from movie list'''    
