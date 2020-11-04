@@ -6,28 +6,30 @@
     <title>Movie recommender</title>
 </head>
 <body>
-  <h1>Welcome to the party, pal!</h1>
+    <h1>Welcome to the party, pal!</h1>
    
-  <form actions="/" method="POST">
-      <h1>Name your movie</h1>
-      <div class="form-field">
-          <input class="user-query" type="text" name="query" placeholder="e.g. Shaun of the dead">
-          <button type="submit" href="/">A whole new world</button>
-      </div>
-  </form>
+    <form actions="/" method="POST">
+        <h1>Name your movie</h1>
+        <div class="form-field">
+            <input class="user-query" type="text" name="query" placeholder="e.g. Shaun of the dead">
+            <button type="submit" href="/">A whole new world</button>
+        </div>
+    </form>
    
-  <div class="output">
-      {% if info %}
+    {% if info %}
+    <div class="output">
         <br>
-        <p>{{ info }}</p>
-      {% endif %}      
-      {% if output %}
-        {% for movie in output %}
-          <br>
-          <p>{{ movie }}</p>
-        {% endfor %}
-      {% endif %}
-   </div> 
+        <p>{{ info }}</p>      
+        {% if output %}
+            {% for movie in output %}
+                <br>
+                <p>{{ movie }}</p>
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        <p>{{ error }}<p>
+    </div>
+    {% endif %}
     
 </body>
 </html>
