@@ -7,7 +7,7 @@ from sklearn.neighbors import NearestNeighbors
 def print_recommendations(knn_output):
     '''Function to print output from movie list'''    
     
-    with open('movie_list.pkl', 'rb') as file:
+    with open('pkl_cellar/movie_list.pkl', 'rb') as file:
         movie_list = pickle.load(file)
     
     distances, indices = knn_output
@@ -27,7 +27,7 @@ def print_recommendations(knn_output):
             
 def movieid_vec(movie_id):
     '''Creates vector array for the KNN model'''  
-    with open('movie_features.pkl', 'rb') as file:
+    with open('pkl_cellar/movie_features.pkl', 'rb') as file:
         movie_features = pickle.load(file)
     
     return movie_features.loc[movie_id].values.reshape(1, -1)
@@ -36,7 +36,7 @@ def movieid_vec(movie_id):
 def get_movieid(query):
     '''Filters queries through movie titles'''    
     
-    with open('movie_map.pkl', 'rb') as file:
+    with open('pkl_cellar/movie_map.pkl', 'rb') as file:
         movie_map = pickle.load(file)
     
     matches = []
@@ -63,7 +63,7 @@ def get_movieid(query):
 
 def recommend_movies(query, n=5):
     '''Final function which uses actual KNN model on sparse matrix'''    
-    with open('model_knn.pkl', 'rb') as file:
+    with open('pkl_cellar/model_knn.pkl', 'rb') as file:
         model_knn = pickle.load(file)
     
     movie_id = get_movieid(query)
@@ -76,11 +76,9 @@ def recommend_movies(query, n=5):
     recs = model_knn.kneighbors(movie_vec, n_neighbors=n_recs)
     
     return print_recommendations(recs)
-    
-
+  
 if __name__ == '__main__':
-     print(recommend_movies('walley'))   
-    
+     print(recommend_movies('walley'))      
     
     
     
